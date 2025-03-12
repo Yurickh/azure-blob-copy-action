@@ -75,7 +75,7 @@ jobs:
         if: github.event.inputs.version
         run: |
           echo "Releasing official build with version ${{ github.event.inputs.version }}..."
-          git config user.email "github@ulaval.ca"
+          git config user.email "github@yurick.dev"
           git config user.name "Github actions"
           git add .
           git commit -m "${{ github.event.inputs.version }}"

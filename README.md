@@ -1,11 +1,16 @@
 # azure-blob-copy-action
+
 Github action to allow copying to and from Azure Blob Storage
+
+## Disclaimer
+
+This is a cheap fork of the original action from [ulaval](https://github.com/ulaval). Unless you have good reasons to use my fork, please prefer using the original one.
 
 ## Usage
 
 ```yaml
 - name: Copy files
-  uses: ulaval/azure-blob-copy-action@v1
+  uses: yurickh/azure-blob-copy-action@v1
   with:
     action: upload
     connection_string: ${{ secrets.CONNECTION_STRING }}
@@ -32,11 +37,10 @@ Github action to allow copying to and from Azure Blob Storage
 | local_directory   | false    | Current folder | Local directory to copy from or to; this can either be an absolute path or a relative path. |
 | http_headers      | false    |                | YAML document that allows setting http headers on blobs when uploading to Azure. Content-Type will be automatically deduced using mime-db. See below for examples. |
 
-
-
 ## http_headers
 
 This input represents a YAML document linking a glob pattern to specific headers. The supported headers are:
+
 - Cache-Control
 - Content-Type
 - Content-Encoding
