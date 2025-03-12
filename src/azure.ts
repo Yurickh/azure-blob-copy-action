@@ -60,6 +60,8 @@ export class AzureBlobStorage {
     await this.walkBlobs(async blob => {
       await this.downloadFile(blob.name, downloadOptions);
       ++i[0];
+    }, {
+      prefix: downloadOptions.blobDirectory
     });
 
     return i[0];

@@ -81,7 +81,7 @@ class AzureBlobStorage {
             yield this.walkBlobs((blob) => __awaiter(this, void 0, void 0, function* () {
                 yield this.downloadFile(blob.name, downloadOptions);
                 ++i[0];
-            }));
+            }, { prefix: downloadOptions.blobDirectory }));
             return i[0];
         });
     }
@@ -5756,7 +5756,7 @@ var ServiceClient = /** @class */ (function () {
      * @param credentials The credentials used for authentication with the service.
      * @param options The service client options that govern the behavior of the client.
      */
-    function ServiceClient(credentials, 
+    function ServiceClient(credentials,
     /* eslint-disable-next-line @azure/azure-sdk/ts-naming-options */
     options) {
         var _this = this;
@@ -9450,7 +9450,7 @@ function __classPrivateFieldSet(receiver, privateMap, value) {
  * Copyright (c) Microsoft and contributors. All rights reserved.
  * Licensed under the MIT License. See License.txt in the project root for
  * license information.
- * 
+ *
  * Azure Core LRO SDK for JavaScript - 1.0.2
  */
 
@@ -23553,7 +23553,7 @@ var Credential = /** @class */ (function () {
      */
     Credential.prototype.create = function (
     // tslint:disable-next-line:variable-name
-    _nextPolicy, 
+    _nextPolicy,
     // tslint:disable-next-line:variable-name
     _options) {
         throw new Error("Method should be implemented in children classes.");
@@ -27854,7 +27854,7 @@ var BlobClient = /** @class */ (function (_super) {
                                                 cpkInfo: options.customerProvidedKey
                                             };
                                             return [4 /*yield*/, this.blobContext.download(tslib.__assign({ abortSignal: options.abortSignal }, updatedOptions))];
-                                        case 1: 
+                                        case 1:
                                         // Debug purpose only
                                         // console.log(
                                         //   `Read from internal stream, range: ${
@@ -29805,7 +29805,6 @@ var BlockBlobClient = /** @class */ (function (_super) {
                 finally {
                     span.end();
                 }
-                return [2 /*return*/];
             });
         });
     };
@@ -30097,7 +30096,7 @@ var BlockBlobClient = /** @class */ (function (_super) {
                                         return [2 /*return*/];
                                 }
                             });
-                        }); }, 
+                        }); },
                         // concurrency should set a smaller value than maxConcurrency, which is helpful to
                         // reduce the possibility when a outgoing handler waits for stream data, in
                         // this situation, outgoing handlers are blocked.
@@ -31182,7 +31181,7 @@ var ContainerClient = /** @class */ (function (_super) {
                     case 1:
                         _b.trys.push([1, 3, 4, 5]);
                         return [4 /*yield*/, this.containerContext.create(tslib.__assign(tslib.__assign({}, options), { spanOptions: spanOptions }))];
-                    case 2: 
+                    case 2:
                     // Spread operator in destructuring assignments,
                     // this will filter out unwanted properties from the response object into result object
                     return [2 /*return*/, _b.sent()];
@@ -56497,7 +56496,7 @@ module.exports = require("zlib");;
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -56510,7 +56509,7 @@ module.exports = require("zlib");;
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		var threw = true;
 /******/ 		try {
@@ -56519,11 +56518,11 @@ module.exports = require("zlib");;
 /******/ 		} finally {
 /******/ 			if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 		}
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -56536,7 +56535,7 @@ module.exports = require("zlib");;
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -56548,12 +56547,12 @@ module.exports = require("zlib");;
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -56564,9 +56563,9 @@ module.exports = require("zlib");;
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/compat */
-/******/ 	
+/******/
 /******/ 	__webpack_require__.ab = __dirname + "/";/************************************************************************/
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup

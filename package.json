@@ -1,6 +1,6 @@
 {
-  "name": "@ulaval/azure-blob-copy-action",
-  "version": "0.0.1",
+  "name": "@yurickh/azure-blob-copy-action",
+  "version": "1.0.0",
   "description": "Github action to allow copying to and from Azure Blob Storage",
   "main": "dist/index.js",
   "scripts": {
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ulaval/azure-blob-copy-action.git"
+    "url": "git+https://github.com/yurickh/azure-blob-copy-action.git"
   },
   "author": "Frédéric Poliquin",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/ulaval/azure-blob-copy-action/issues"
+    "url": "https://github.com/yurickh/azure-blob-copy-action/issues"
   },
-  "homepage": "https://github.com/ulaval/azure-blob-copy-action#readme",
+  "homepage": "https://github.com/yurickh/azure-blob-copy-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@azure/storage-blob": "^12.3.0",
