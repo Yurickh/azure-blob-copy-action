@@ -10,7 +10,7 @@ This is a cheap fork of the original action from [ulaval](https://github.com/ula
 
 ```yaml
 - name: Copy files
-  uses: yurickh/azure-blob-copy-action@v1
+  uses: yurickh/azure-blob-copy@v1
   with:
     action: upload
     connection_string: ${{ secrets.CONNECTION_STRING }}

@@ -1,4 +1,4 @@
-name: azure-blob-copy-action
+name: azure-blob-copy
 description: Github action to allow copying to and from Azure Blob Storage
 branding:
   icon: "copy"
