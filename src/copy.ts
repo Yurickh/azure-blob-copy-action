@@ -42,8 +42,8 @@ async function doUpload(params: CopyParameters): Promise<void> {
 }
 
 async function doDownload(params: CopyParameters): Promise<void> {
-  core.info(`Downloading blobs to ${params.localDirectory} from the ${params.containerName} container...`);
   const azureBlobStorage = await azure.AzureBlobStorage.create(params);
+  core.info(`Downloading blobs to ${params.localDirectory} from the ${params.containerName} container...`);
   const count = await azureBlobStorage.downloadFiles(params);
   core.info(`Copied ${count} blobs successfully.`);
 }
