@@ -58,10 +58,10 @@ export class AzureBlobStorage {
     const i: number[] = [0];
 
     await this.walkBlobs(async blob => {
-      await this.downloadFile(blob.name, downloadOptions);
-      ++i[0];
-    }, {
-      prefix: downloadOptions.blobDirectory
+      if (!downloadOptions.blobDirectory || blob.name.startsWith(downloadOptions.blobDirectory)) {
+        await this.downloadFile(blob.name, downloadOptions);
+        ++i[0];
+      }
     });
 
     return i[0];

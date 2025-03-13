@@ -79,9 +79,11 @@ class AzureBlobStorage {
         return __awaiter(this, void 0, void 0, function* () {
             const i = [0];
             yield this.walkBlobs((blob) => __awaiter(this, void 0, void 0, function* () {
+               if (!downloadOptions.blobDirectory || blob.name.startsWith(downloadOptions.blobDirectory)) {
                 yield this.downloadFile(blob.name, downloadOptions);
                 ++i[0];
-            }, { prefix: downloadOptions.blobDirectory }));
+              }
+            }));
             return i[0];
         });
     }
