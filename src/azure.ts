@@ -102,10 +102,9 @@ export class AzureBlobStorage {
   }
 
   async downloadFile(blobName: string, downloadOptions: AzureDownloadOptions): Promise<void> {
-    core.info(`Downloading ${blobName}...`);
-
     const destFilePath = AzureBlobStorage.computeDownloadDestFilePath(blobName, downloadOptions);
 
+    core.info(`Downloading ${blobName} into ${destFilePath}`);
     await fs.mkdir(path.dirname(destFilePath), { recursive: true });
 
     const blockBlobClient = this.containerClient.getBlockBlobClient(blobName);
