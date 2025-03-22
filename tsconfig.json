@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "commonjs",
-    "outDir": "dist/js",
+    "target": "es2022",
+    "outDir": "dist",
     "rootDir": "src",
     "strict": true,
     "noImplicitAny": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "types": ["vitest/globals"]
   },
   "exclude": ["node_modules"]
 }

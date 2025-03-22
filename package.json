@@ -1,21 +1,21 @@
 {
-  "name": "@yurickh/azure-blob-copy",
+  "name": "@yurickh/azure-blob-copy-action",
   "version": "1.0.0",
   "description": "Github action to allow copying to and from Azure Blob Storage",
   "main": "dist/index.js",
   "scripts": {
-    "clean": "rimraf dist/js && rimraf dits/tests",
+    "clean": "rimraf dist",
     "lint": "eslint .",
     "compile": "tsc",
-    "build": "npm run compile && ncc build --license licenses.txt dist/js/main.js",
-    "test": "jest",
-    "rebuildall": "npm run clean && npm run build && npm run test"
+    "build": "pnpm compile && ncc build --license licenses.txt dist/js/main.js",
+    "test": "vitest",
+    "rebuildall": "pnpm clean && pnpm build && pnpm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yurickh/azure-blob-copy-action.git"
   },
-  "author": "Frédéric Poliquin",
+  "author": "Frédéric Poliquin and Yurick Hauschild",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/yurickh/azure-blob-copy-action/issues"
@@ -29,19 +29,26 @@
     "yaml": "^1.10.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.19",
-    "@types/mime-db": "^1.43.0",
+    "@eslint/js": "^9.23.0",
+    "mime-db": "^1.54.0",
+    "@types/mime-db": "^1.43.5",
     "@types/mime-types": "^2.1.0",
     "@types/minimatch": "^3.0.3",
-    "@types/node": "^14.14.14",
-    "@typescript-eslint/eslint-plugin": "^4.10.0",
-    "@typescript-eslint/parser": "^4.10.0",
+    "@types/node": "^22.13.11",
     "@vercel/ncc": "^0.25.1",
-    "eslint": "^7.15.0",
-    "eslint-plugin-jest": "^24.1.3",
-    "jest": "^26.6.3",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^26.4.4",
-    "typescript": "^4.1.3"
+    "@vitest/eslint-plugin": "^1.1.38",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.27.0",
+    "vitest": "^3.0.9"
+  },
+  "packageManager": "pnpm@10.6.5+sha512.cdf928fca20832cd59ec53826492b7dc25dc524d4370b6b4adbf65803d32efaa6c1c88147c0ae4e8d579a6c9eec715757b50d4fa35eea179d868eada4ed043af",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
