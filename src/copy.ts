@@ -1,5 +1,5 @@
-import * as core from "@actions/core"
-import * as azure from "./azure"
+import * as core from '@actions/core'
+import * as azure from './azure'
 
 export class CopyParameters
   implements
@@ -15,27 +15,27 @@ export class CopyParameters
     public readonly localDirectory: string,
     public readonly httpHeaders?: azure.HttpHeadersOptions,
   ) {
-    if (!(action === "upload" || action === "download")) {
+    if (!(action === 'upload' || action === 'download')) {
       throw new Error(
         "The action input is required and must be 'upload' or 'download'.",
       )
     }
 
     if (!connectionString) {
-      throw new Error("The connection_string input is required.")
+      throw new Error('The connection_string input is required.')
     }
 
     if (!containerName) {
-      throw new Error("The container_name input is required.")
+      throw new Error('The container_name input is required.')
     }
 
     if (!localDirectory) {
-      throw new Error("The local_directory input is required.")
+      throw new Error('The local_directory input is required.')
     }
   }
 
   isUpload(): boolean {
-    return this.action === "upload"
+    return this.action === 'upload'
   }
 }
 

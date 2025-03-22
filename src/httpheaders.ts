@@ -1,15 +1,15 @@
-import { BlobHTTPHeaders } from "@azure/storage-blob"
-import mimeDb from "mime-db"
-import * as mime from "mime-types"
-import minimatch from "minimatch"
-import path from "path"
-import { AzureUploadOptions } from "./azure"
+import { BlobHTTPHeaders } from '@azure/storage-blob'
+import mimeDb from 'mime-db'
+import * as mime from 'mime-types'
+import minimatch from 'minimatch'
+import path from 'path'
+import { AzureUploadOptions } from './azure'
 
 // Adding utf-8 as default charset for text files
-Object.defineProperties(mimeDb["text/plain"], {
+Object.defineProperties(mimeDb['text/plain'], {
   charset: {
     writable: true,
-    value: "UTF-8",
+    value: 'UTF-8',
   },
 })
 

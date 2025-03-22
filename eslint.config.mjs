@@ -1,13 +1,13 @@
-import { globalIgnores } from "eslint/config"
-import globals from "globals"
-import eslint from "@eslint/js"
-import tseslint from "typescript-eslint"
+import { globalIgnores } from 'eslint/config'
+import globals from 'globals'
+import eslint from '@eslint/js'
+import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  globalIgnores(["dist"]),
+  globalIgnores(['dist']),
   eslint.configs.recommended,
   {
-    files: ["**/*.{js,mjs,cjs,ts}"],
+    files: ['**/*.{js,mjs,cjs,ts}'],
     languageOptions: { globals: globals.node },
   },
   tseslint.configs.recommendedTypeChecked,
@@ -15,7 +15,7 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: ["*.mjs", "*.json"],
+          allowDefaultProject: ['*.mjs', '*.json', '*.ts'],
         },
         tsconfigRootDir: import.meta.dirname,
       },

@@ -1,14 +1,14 @@
-import * as core from "@actions/core"
-import yaml from "yaml"
-import { GlobHttpHeaders, HttpHeadersOptions } from "./azure"
-import { copy, CopyParameters } from "./copy"
+import * as core from '@actions/core'
+import yaml from 'yaml'
+import { GlobHttpHeaders, HttpHeadersOptions } from './azure'
+import { copy, CopyParameters } from './copy'
 
 function mapHttpHeaders(entry: {
   glob?: string
   headers?: Record<string, string>
 }): GlobHttpHeaders {
   if (!entry.glob) {
-    throw new Error("The glob is required")
+    throw new Error('The glob is required')
   }
 
   if (!entry.headers) {
@@ -18,17 +18,17 @@ function mapHttpHeaders(entry: {
   return {
     glob: entry.glob.toString(),
     httpHeaders: {
-      blobCacheControl: entry.headers["Cache-Control"],
-      blobContentDisposition: entry.headers["Content-Disposition"],
-      blobContentEncoding: entry.headers["Content-Encoding"],
-      blobContentLanguage: entry.headers["Content-Language"],
-      blobContentType: entry.headers["Content-Type"],
+      blobCacheControl: entry.headers['Cache-Control'],
+      blobContentDisposition: entry.headers['Content-Disposition'],
+      blobContentEncoding: entry.headers['Content-Encoding'],
+      blobContentLanguage: entry.headers['Content-Language'],
+      blobContentType: entry.headers['Content-Type'],
     },
   }
 }
 
 export function parseHttpHeaders(yamlInput: string): HttpHeadersOptions {
-  core.info("http_headers: \n" + yamlInput)
+  core.info('http_headers: \n' + yamlInput)
 
   if (!yamlInput) {
     return []
@@ -45,15 +45,15 @@ export function parseHttpHeaders(yamlInput: string): HttpHeadersOptions {
 }
 
 async function run(): Promise<void> {
-  const action = core.getInput("action", { required: true })
-  const connectionString = core.getInput("connection_string", {
+  const action = core.getInput('action', { required: true })
+  const connectionString = core.getInput('connection_string', {
     required: true,
   })
-  const containerName = core.getInput("container_name", { required: true })
-  const blobDirectory = core.getInput("blob_directory", { required: false })
-  const localDirectory = core.getInput("local_directory", { required: true })
+  const containerName = core.getInput('container_name', { required: true })
+  const blobDirectory = core.getInput('blob_directory', { required: false })
+  const localDirectory = core.getInput('local_directory', { required: true })
   const httpHeaders = parseHttpHeaders(
-    core.getInput("http_headers", { required: false }),
+    core.getInput('http_headers', { required: false }),
   )
 
   await copy(

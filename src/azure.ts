@@ -1,9 +1,9 @@
-import * as core from "@actions/core"
-import * as azure from "@azure/storage-blob"
-import { promises as fs } from "fs"
-import path, * as Path from "path"
-import * as files from "./files"
-import { resolveHttpHeaders } from "./httpheaders"
+import * as core from '@actions/core'
+import * as azure from '@azure/storage-blob'
+import { promises as fs } from 'fs'
+import path, * as Path from 'path'
+import * as files from './files'
+import { resolveHttpHeaders } from './httpheaders'
 
 export interface AzureConnectionOptions {
   readonly connectionString: string
@@ -107,9 +107,9 @@ export class AzureBlobStorage {
       blobName = path.join(uploadOptions.blobDirectory, blobName)
     }
 
-    blobName = blobName.replace(/\\/g, "/")
+    blobName = blobName.replace(/\\/g, '/')
 
-    if (blobName.startsWith("/")) {
+    if (blobName.startsWith('/')) {
       blobName = blobName.substring(1)
     }
 
@@ -117,7 +117,7 @@ export class AzureBlobStorage {
 
     const httpHeaders = resolveHttpHeaders(filePath, uploadOptions)
 
-    core.info("Http headers: \n" + JSON.stringify(httpHeaders))
+    core.info('Http headers: \n' + JSON.stringify(httpHeaders))
 
     const blockBlobClient = this.containerClient.getBlockBlobClient(blobName)
     await blockBlobClient.uploadFile(filePath, { blobHTTPHeaders: httpHeaders })
@@ -147,11 +147,11 @@ export class AzureBlobStorage {
 
     if (downloadOptions.blobDirectory) {
       if (!path.isAbsolute(blobName)) {
-        blobName = path.join("/", blobName)
+        blobName = path.join('/', blobName)
       }
 
       destFilePath = path.relative(
-        path.join("/", downloadOptions.blobDirectory),
+        path.join('/', downloadOptions.blobDirectory),
         blobName,
       )
     }

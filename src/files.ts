@@ -1,5 +1,5 @@
-import { promises as Fs } from "fs"
-import * as Path from "path"
+import { promises as Fs } from 'fs'
+import * as Path from 'path'
 
 export async function walkFiles(
   rootPath: string,
