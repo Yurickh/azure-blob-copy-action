@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "build": "npm run clean && ncc build src/main.ts --license licenses.txt",
     "test": "vitest",
-    "rebuildall": "pnpm clean && pnpm build && pnpm test"
+    "rebuildall": "pnpm clean && pnpm build && pnpm test",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
-    "mime-db": "^1.54.0",
     "@types/mime-db": "^1.43.5",
     "@types/mime-types": "^2.1.0",
     "@types/node": "^22.13.11",
@@ -43,6 +43,9 @@
     "dotenv": "^16.4.7",
     "eslint": "^9.23.0",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "mime-db": "^1.54.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.2",
