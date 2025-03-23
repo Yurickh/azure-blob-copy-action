@@ -1,0 +1,106 @@
+name: Continuous Integration and Delivery
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run lint
+        run: pnpm lint
+
+      - name: Check types
+        run: pnpm check-types
+
+      - name: Test
+        run: pnpm test
+        env:
+          PRESERVE_TEST_ARTIFACTS: '1'
+          AZURE_CONNECTION_STRING: ${{ secrets.AZURE_CONNECTION_STRING }}
+
+      - name: Upload integration test
+        uses: ./
+        with:
+          action: upload
+          connection_string: ${{ secrets.AZURE_CONNECTION_STRING }}
+          container_name: tests
+          blob_directory: integration_test
+          local_directory: temp_tests
+          http_headers: |
+            - glob: "**/*.yml"
+              headers:
+                Cache-Control: public, no-cache
+
+      - name: Download integration test
+        uses: ./
+        with:
+          action: download
+          connection_string: ${{ secrets.AZURE_CONNECTION_STRING }}
+          container_name: tests
+          blob_directory: integration_test
+          local_directory: temp_tests/downloads
+
+  release:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Get next version
+        id: get_next_version
+        uses: thenativeweb/get-next-version@main
+        with:
+          prefix: 'v'
+
+      - name: Release
+        if: steps.get_next_version.outputs.hasNextVersion
+        run: |
+          echo "Releasing official build with version ${{ steps.get_next_version.outputs.version }}..."
+          git config user.email "github@yurick.dev"
+          git config user.name "Github actions"
+          git add .
+          git commit -m "${{ steps.get_next_version.outputs.version }}"
+          git tag -f -m "${{ steps.get_next_version.outputs.version }}" ${{ steps.get_next_version.outputs.version }}
+          git push --follow-tags

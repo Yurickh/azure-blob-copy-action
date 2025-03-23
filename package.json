@@ -8,6 +8,7 @@
   "version": "1.0.0",
   "description": "Github action to allow copying to and from Azure Blob Storage",
   "scripts": {
+    "check-types": "tsc",
     "clean": "rimraf dist",
     "lint": "eslint .",
     "build": "npm run clean && ncc build src/main.ts --license licenses.txt",

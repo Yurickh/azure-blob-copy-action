@@ -4,7 +4,9 @@ import { AzureBlobStorage, AzureConnectionOptions } from './azure'
 import { walkFiles } from './files'
 
 afterAll(() => {
-  fs.rmSync('temp_tests', { recursive: true })
+  if (!process.env.PRESERVE_TEST_ARTIFACTS) {
+    fs.rmSync('temp_tests', { recursive: true })
+  }
 })
 
 const connectionString = process.env.AZURE_CONNECTION_STRING
