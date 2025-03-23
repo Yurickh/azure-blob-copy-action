@@ -63,6 +63,7 @@ jobs:
           local_directory: temp_tests/downloads
 
   release:
+    if: success() && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs:
       - test
