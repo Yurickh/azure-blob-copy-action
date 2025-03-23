@@ -1,32 +1,26 @@
 import * as fs from 'fs'
-import os from 'os'
 import path from 'path'
 import { AzureBlobStorage, AzureConnectionOptions } from './azure'
 import { walkFiles } from './files'
 
-/**
- * TODO: find a way to test azure blob storage without relying on ulaval's local configuration
- */
-function loadParams() {
-  const paramsFilename = path.join(os.homedir(), 'ulaval', 'ulaval.json')
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return JSON.parse(fs.readFileSync(paramsFilename, { encoding: 'utf8' }))
-}
+afterAll(() => {
+  fs.rmSync('temp_tests', { recursive: true })
+})
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const connectionString =
-  process.env.CONNECTION_STRING ||
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  loadParams()['azure-blob-copy-action:connectionString']
+const connectionString = process.env.AZURE_CONNECTION_STRING
+
+if (!connectionString) {
+  throw new Error(
+    'Failed to read process.env.AZURE_CONNECTION_STRING. Please ensure env variables are properly configured',
+  )
+}
 const connectOptions: AzureConnectionOptions = {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   connectionString,
   containerName: 'tests',
 }
 
 test('connection strings', async () => {
   await expect(
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     AzureBlobStorage.create({ connectionString, containerName: 'xxx' }),
   ).rejects.toThrow()
   await expect(AzureBlobStorage.create(connectOptions)).resolves.toBeDefined()
@@ -35,11 +29,11 @@ test('connection strings', async () => {
 test('upload download file', async () => {
   const azureBlobStorage = await AzureBlobStorage.create(connectOptions)
 
-  const uploadDirectory = path.join('dist', 'tests', 'upload')
+  const uploadDirectory = path.join('temp_tests', 'upload')
   const uploadFilePath = path.join(uploadDirectory, 'uploadFile.txt')
 
-  const downloadDirectory = path.join('dist', 'tests', 'download')
-  const downloadDirectory2 = path.join('dist', 'tests', 'download2')
+  const downloadDirectory = path.join('temp_tests', 'download')
+  const downloadDirectory2 = path.join('temp_tests', 'download2')
   const downloadFilePath = path.join(downloadDirectory, 'uploadFile.txt')
   const downloadFilePath2 = path.join(downloadDirectory2, 'uploadFile.txt')
 
@@ -86,12 +80,12 @@ test('walkBlobs', async () => {
 })
 
 test('upload download files', async () => {
-  const downloadedPath = path.join('dist', 'tests', 'downloaded')
+  const downloadedPath = path.join('temp_tests', 'downloaded')
 
   const azureBlobStorage = await AzureBlobStorage.create(connectOptions)
 
   const countUploaded = await azureBlobStorage.uploadFiles({
-    localDirectory: '.github',
+    localDirectory: 'temp_tests',
   })
 
   expect(countUploaded).toBeGreaterThan(0)
