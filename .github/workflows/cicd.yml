@@ -102,6 +102,6 @@ jobs:
           git config user.email "github@yurick.dev"
           git config user.name "Github actions"
           git add .
-          git commit -m "${{ steps.get_next_version.outputs.version }}"
+          git commit -m "${{ steps.get_next_version.outputs.version }}" --allow-empty
           git tag -f -m "${{ steps.get_next_version.outputs.version }}" ${{ steps.get_next_version.outputs.version }}
           git push --follow-tags
