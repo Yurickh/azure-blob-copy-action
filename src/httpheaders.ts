@@ -1,7 +1,7 @@
 import { BlobHTTPHeaders } from '@azure/storage-blob'
 import mimeDb from 'mime-db'
 import * as mime from 'mime-types'
-import minimatch from 'minimatch'
+import { minimatch } from 'minimatch'
 import path from 'path'
 import { AzureUploadOptions } from './azure'
 

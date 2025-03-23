@@ -28,15 +28,14 @@
     "@actions/core": "^1.2.6",
     "@azure/storage-blob": "^12.3.0",
     "mime-types": "^2.1.27",
-    "minimatch": "^3.0.4",
-    "yaml": "^1.10.0"
+    "minimatch": "^10.0.1",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
     "mime-db": "^1.54.0",
     "@types/mime-db": "^1.43.5",
     "@types/mime-types": "^2.1.0",
-    "@types/minimatch": "^3.0.3",
     "@types/node": "^22.13.11",
     "@vercel/ncc": ">=0.38.3",
     "@vitest/eslint-plugin": "^1.1.38",
