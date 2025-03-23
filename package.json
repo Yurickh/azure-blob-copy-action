@@ -1,13 +1,16 @@
 {
   "name": "@yurickh/azure-blob-copy-action",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
   "version": "1.0.0",
   "description": "Github action to allow copying to and from Azure Blob Storage",
-  "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
     "lint": "eslint .",
-    "compile": "tsc",
-    "build": "pnpm compile && ncc build --license licenses.txt dist/js/main.js",
+    "build": "npm run clean && ncc build src/main.ts --license licenses.txt",
     "test": "vitest",
     "rebuildall": "pnpm clean && pnpm build && pnpm test"
   },
@@ -35,7 +38,7 @@
     "@types/mime-types": "^2.1.0",
     "@types/minimatch": "^3.0.3",
     "@types/node": "^22.13.11",
-    "@vercel/ncc": "^0.25.1",
+    "@vercel/ncc": ">=0.38.3",
     "@vitest/eslint-plugin": "^1.1.38",
     "dotenv": "^16.4.7",
     "eslint": "^9.23.0",
